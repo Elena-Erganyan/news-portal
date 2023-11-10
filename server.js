@@ -24,7 +24,7 @@ app.use(formData.parse({uploadDir: os.tmpdir(), autoClean: true}));
 
 //routes
 app.use("/api/users", require("./api/users/routes"));
-// app.use("/api/news", require("./api/news/routes"));
+app.use("/api/news", require("./api/news/routes"));
 
 
 /* app.post("/api/test", async (req, res)=> {
