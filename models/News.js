@@ -19,6 +19,7 @@ const newsSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  publishDate: Date,
 }, {timestamps: true});
 
 module.exports = mongoose.model("News", newsSchema, "News");

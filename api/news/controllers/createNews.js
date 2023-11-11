@@ -1,5 +1,5 @@
 const News = require("../../../models/News");
-const publishNews = require("../../schedule/publishNews");
+const schedule = require("node-schedule");
 
 const createNews = async (req, res) => {
   const user = req.user;
@@ -10,11 +10,16 @@ const createNews = async (req, res) => {
   user.newsHistory = [...user.newsHistory, news._id];
   await user.save();
 
-  if (req.body.publishImmediately === "true") {
+  if (news.publishDate) {
+    const datetime = new Date(news.publishDate);
+
+    schedule.scheduleJob(datetime, async function(){
+      news.published = true;
+      await news.save();
+    });
+  } else {
     news.published = true;
     await news.save();
-  } else {
-    await publishNews(news, req.body.datetime);
   }
   
   res.status(201).json(news);

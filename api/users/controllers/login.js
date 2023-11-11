@@ -35,7 +35,7 @@ const login = async (req, res) => {
     throw new UnauthorizedError("Please activate your account to be able to login") 
   }
 
-  setUserCookies(res, user, "1d");
+  setUserCookies(res, user);
   
   user.password = undefined; // not to return this field to the frontend
   

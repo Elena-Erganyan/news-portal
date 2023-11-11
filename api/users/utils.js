@@ -12,23 +12,26 @@ const hashPassword = async (password) => {
   return hashedPassword;
 };
 
-const setUserCookies = (res, user, maxDaysAge = '1d')=>{
-  const token = createToken({_id: user._id, role: user.role}, maxDaysAge);
+const setUserCookies = (res, user, maxDaysAge = "1d") => {
+  const token = createToken({ _id: user._id }, maxDaysAge);
   const oneDayMiliseconds = 24 * 60 * 60 * 1000;
 
   res.cookie("userToken", token, {
     httpOnly: true,
     secure: true,
     maxAge: parseFloat(maxDaysAge) * oneDayMiliseconds
-  })
+  });
+
   res.cookie("loggedIn", true, {
     maxAge: parseFloat(maxDaysAge) * oneDayMiliseconds
-  })
+  });
+
   res.cookie("cookiesAge", maxDaysAge, {
     httpOnly: true,
     secure: true,
     maxAge: parseFloat(maxDaysAge) * oneDayMiliseconds
-  })
+  });
+  
   return token;
 }
 

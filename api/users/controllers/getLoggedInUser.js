@@ -22,8 +22,7 @@ const getLoggedInUser = async (req, res)=> {
   
   user.password = undefined;
 
-  
-  setUserCookies(res, user, req.cookies.cookiesAge) // refreshing user cookies to a longer period on what the user chose when he logged in
+  setUserCookies(res, user) // refreshing user cookies to a longer period on what the user chose when he logged in
    
   res.status(200).json(user);
 }

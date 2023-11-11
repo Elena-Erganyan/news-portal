@@ -7,10 +7,7 @@ const formData = require("express-form-data");
 const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const { createServer } = require("http");
-
 const app = express();
-const httpServer = createServer(app);
 
 // middleware
 app.use(express.json());
@@ -46,7 +43,7 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to DB successfully!")
-    httpServer.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Listening on port " + process.env.PORT);
     })
     
