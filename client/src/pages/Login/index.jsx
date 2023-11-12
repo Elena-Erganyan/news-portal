@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLoginMutation } from "../../redux/api/userApi";
 import { getErrorMessage } from "../../utils/getErrorMessage";
+import ResendEmail from "../../components/ResendEmail";
 
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
         setErrors((prevErrors) => ({...prevErrors, identifier: errMessage}));
       } else {
         setErrorMessage(errMessage);
-        if (errMessage === 'please activate your account to be able to login') {
+        if (errMessage === 'Please activate your account to be able to login') {
           setTimeout(() => setShowResendSection(true), 9000);
         }
       }
@@ -82,7 +83,7 @@ const Login = () => {
         <p>Ещё нет учетной записи? <Link to="/register">Зарегистрироваться</Link></p>
       </div>
 
-      {/* {showResendSection && <ResendEmail email={identifier} />} */}
+      {showResendSection && <ResendEmail email={identifier} />}
       {errorMessage && <p className="error">{errorMessage}</p>}
       {message && <p className="success-msg">{message}</p>}
     </form>

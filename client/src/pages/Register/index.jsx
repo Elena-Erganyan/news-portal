@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRegisterMutation } from "../../redux/api/userApi";
 import { getErrorMessage } from "../../utils/getErrorMessage";
-// import ResendEmail from "../../components/ResendEmail";
+import ResendEmail from "../../components/ResendEmail";
 
 
 const Register = () => { 
@@ -116,7 +116,7 @@ const Register = () => {
         <p>Уже зарегистрированы? <Link to="/login">Войти</Link></p>
       </div>
         
-      {/* {showResendSection && <ResendEmail email={email} />} */}
+      {showResendSection && <ResendEmail email={email} />}
       {errorMessage && <p className="error">{errorMessage}</p>}
       {message && <p className="success-msg">{message}</p>}
     </form>

@@ -62,6 +62,11 @@ button:hover {
   background-color: blue;
 }
 
+button:disabled:hover {
+  background-color: #646cff;
+  cursor: not-allowed;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -70,6 +75,11 @@ form {
   padding: 25px;
   border-radius: 10px;
   background-color: #404040;
+}
+
+h1 {
+  font-size: 25px;
+  font-weight: bold;
 }
 
 h2 {

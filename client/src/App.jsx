@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import "./App.scss";
 
 const Register = lazy(()=> import("./pages/Register"));
+const Activation = lazy(()=> import("./pages/Activation"));
 const Login = lazy(()=> import("./pages/Login"));
 const ArticleList= lazy(()=> import("./pages/ArticleList"));
 const ArticleEditor = lazy(()=> import("./pages/ArticleEditor"));
@@ -32,12 +33,13 @@ function App() {
             <Suspense fallback="loading...">
               <Routes>
                 <Route path="/" element={user ? <Navigate to= "/dashboard" /> : <ArticleList />} />
+                {/* <Route path="/dashboard" element={user ? <Navigate to="/" /> : <Dashboard />} /> */}
                 <Route path="/articles/add" element={<ArticleEditor />} />
                 <Route path="/articles/:articleId/edit" element={<ArticleEditor />} />
 
                 <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
                 <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
-                {/* <Route path="/activation" element={user ? <Navigate to="/" /> : <ActivationMessage />} /> */}
+                <Route path="/activation" element={user ? <Navigate to="/" /> : <Activation />} />
                 {/* <Route path="*" element={<NotFound />}/> */}
               </Routes>
             </Suspense>
