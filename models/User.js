@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "Can't be empty"],
     validate: {
       validator: (passwordStr) => {
         if (!isStrongPassword(passwordStr)) {
