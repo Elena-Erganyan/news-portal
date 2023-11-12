@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser } from "./redux/userSlice";
 import { useGetMeQuery } from "./redux/api/userApi/getUserApi";
 import Cookies from "js-cookie";
-import "./App.scss";
 
 const Register = lazy(()=> import("./pages/Register"));
 const Activation = lazy(()=> import("./pages/Activation"));
@@ -20,8 +19,6 @@ function App() {
 
   // fetching user data only if we have cookies.loggedIn === "true"
   const {isLoading, error} = useGetMeQuery(undefined, {skip: !isLoggedIn || isLoggedIn === "false"});
-
-  console.log(user);
 
   return isLoading ? <p>Загрузка...</p>
     : error
@@ -40,7 +37,6 @@ function App() {
                 <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <Login />} />
                 <Route path="/register" element={user ? <Navigate to="/dashboard" /> : <Register />} />
                 <Route path="/activation" element={user ? <Navigate to="/" /> : <Activation />} />
-                {/* <Route path="*" element={<NotFound />}/> */}
               </Routes>
             </Suspense>
           </BrowserRouter>

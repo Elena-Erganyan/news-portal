@@ -36,8 +36,8 @@ const ResendEmail = ({ email }) => {
   };
 
   return (
-    <div сlassname="activation">
-      <div сlassname="activation__wrapper">
+    <div className="activation">
+      <div className="activation__wrapper">
         
         <p>Не получили письмо активации?</p>
         

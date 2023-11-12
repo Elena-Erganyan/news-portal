@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Account activation</title>
+  <title>Активация учётной записи</title>
   <style>
     .email {
       font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
@@ -32,13 +32,13 @@
 <body>
   <div class="email">
     <div id="activationContainer">
-      <h3>Hello {{name}}</h3>
-      <p> Please activate your account by clicking on the link below</p>
+      <h3>Добрый день, {{name}}</h3>
+      <p>Пожалуйста, активируйте свою учётную запись, перейдя по ссылке ниже</p>
       <a href="{{host}}/activation?token={{emailToken}}" target="_blank">
-        Click here
+        Нажмите здесь
       </a>
     </div>
-    <p>This activation link is valid for 24 hours</p>
+    <p>Эта ссылка действительна в течение 24 часов</p>
   </div>
 </body>
 </html>

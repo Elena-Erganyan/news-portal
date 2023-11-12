@@ -10,29 +10,29 @@ const login = async (req, res) => {
   let {identifier, password} = req.body; // identifier could be the email or username
 
   if (!identifier || !password) {
-    throw new BadReqError("A required field is missing");
+    throw new BadReqError("Не заполнено обязательное поле");
   }
 
-  const identifierUsed = isEmail(identifier) ?  "email" : "username";
+  const identifierUsed = isEmail(identifier) ?  "электронная почта" : "юзернейм";
   
-  if (identifierUsed === "email"){
+  if (identifierUsed === "электронная почта"){
     identifier = identifier.toLowerCase();
   }
   
   const user = await User.findOne({[identifierUsed]: identifier});
 
   if (user === null) {
-    throw new DB404Error(`This ${identifierUsed} cannot be found or is incorrect`);
+    throw new DB404Error(`Данный идентификатор: ${identifierUsed} не найден или некорректен`);
   }
 
   const isMatching = await bcrypt.compare(password, user.password);
 
   if (!isMatching){
-    throw new UnauthorizedError("Incorrect password");
+    throw new UnauthorizedError("Неправильный пароль");
   }
 
   if (!user.activated) {
-    throw new UnauthorizedError("Please activate your account to be able to login") 
+    throw new UnauthorizedError("Пожалуйста, активируйте свою учётную запись чтобы войти") 
   }
 
   setUserCookies(res, user);

@@ -1,19 +1,19 @@
 class DB404Error extends Error {
-  constructor (name, description = "Not found") {
+  constructor (name, description = "Не найдено") {
     super(name, description);
     this.code = 404
   }
 }
 
 class BadReqError extends Error {
-  constructor (name, description = "Data no valid") {
+  constructor (name, description = "Данные не корректны") {
     super(name, description);
     this.code = 400
   }
 }
 
 class UnauthorizedError extends Error {
-  constructor (name, description = "Not permitted") {
+  constructor (name, description = "Доступ запрещён") {
     super(name, description);
     this.code = 401
   }

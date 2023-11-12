@@ -12,7 +12,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({identifier: "", password: ""});
-  const [showResendSection, setShowResendSection] = useState(false);
+  const [showResendSection, setShowResendSection] = useState(true);
 
   const [login, { isLoading, error }] = useLoginMutation();
   console.log(error);
@@ -20,13 +20,13 @@ const Login = () => {
   useEffect(() => {
     if (error) {
       const errMessage = getErrorMessage(error);
-      if (errMessage.indexOf('password') !== -1) {
+      if (errMessage.indexOf("пароль") !== -1) {
         setErrors((prevErrors) => ({...prevErrors, password: errMessage}));
-      } else if (errMessage.indexOf('username') !== -1 || errMessage.indexOf('email') !== -1) {
+      } else if (errMessage.indexOf("юзернейм") !== -1 || errMessage.indexOf("электроная почта") !== -1) {
         setErrors((prevErrors) => ({...prevErrors, identifier: errMessage}));
       } else {
         setErrorMessage(errMessage);
-        if (errMessage === 'Please activate your account to be able to login') {
+        if (errMessage === "Пожалуйста, активируйте свою учётную запись чтобы войти") {
           setTimeout(() => setShowResendSection(true), 9000);
         }
       }

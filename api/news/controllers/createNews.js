@@ -10,8 +10,8 @@ const createNews = async (req, res) => {
   user.newsHistory = [...user.newsHistory, news._id];
   await user.save();
 
-  if (news.publishDate) {
-    const datetime = new Date(news.publishDate);
+  if (req.body.publishDate) {
+    const datetime = new Date(req.body.publishDate);
 
     schedule.scheduleJob(datetime, async function(){
       news.published = true;
@@ -22,7 +22,7 @@ const createNews = async (req, res) => {
     await news.save();
   }
   
-  res.status(201).json(news);
+  res.status(201).json({news, message: "Новость успешно создана"});
 }
 
 module.exports = createNews;

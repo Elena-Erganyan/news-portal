@@ -9,11 +9,11 @@ const getLoggedInUser = async (req, res)=> {
   const loggedInCookie = req.cookies.loggedIn;
 
   if (!loggedInCookie){
-    throw new UnauthorizedError("Not logged In");
+    throw new UnauthorizedError("Пользователь не авторизован");
   }
 
   if (!userToken){
-    throw new UnauthorizedError("Not logged in or session expired");
+    throw new UnauthorizedError("Пользователь не авторизован или сессия истекла");
   }
 
   const {_id} = jwt.verify(userToken, process.env.SECRET);

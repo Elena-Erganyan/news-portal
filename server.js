@@ -23,12 +23,6 @@ app.use(formData.parse({uploadDir: os.tmpdir(), autoClean: true}));
 app.use("/api/users", require("./api/users/routes"));
 app.use("/api/news", require("./api/news/routes"));
 
-
-/* app.post("/api/test", async (req, res)=> {
-   
-  res.status(200).json(response)
-}) */
-
 // return the client
 app.get('/*', (_, res) => {
   res.sendFile(path.join(__dirname, './client/index.html'));

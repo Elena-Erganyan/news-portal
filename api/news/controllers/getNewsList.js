@@ -6,7 +6,7 @@ const getNewsList = async (req, res)=> {
   const query = req.query;
 
   if (Object.keys(query).length === 0) {
-    throw new BadReqError("No query was passed");
+    throw new BadReqError("Не было передано никакого запроса");
   }
 
   const news = await News.find(query).lean();

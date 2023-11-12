@@ -6,7 +6,7 @@ const auth = async (req, res, next)=> {
   const tokenPassed = req.cookies.userToken;
   
   if (!tokenPassed) {
-    return res.status(401).json({message: "Authorization token required, are you logged in?"});
+    return res.status(401).json({message: "Требуется авторизация, вы вошли в систему?"});
   }
   
   try {
@@ -22,7 +22,7 @@ const auth = async (req, res, next)=> {
     let message = err.message;
     if (err.name == "TokenExpiredError"){
       res.clearCookie("userToken");
-      message = "you need to login again first";
+      message = "Вам необходимо снова войти в свою учётную запись";
     }
     res.status(401).json({ message });
   }

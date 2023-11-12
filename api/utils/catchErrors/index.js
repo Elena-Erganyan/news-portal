@@ -14,14 +14,14 @@ const handleError = (err, res) => {
         }, "").trim();
       } else { // programmatic error
         statusCode = 500; 
-        message = "internal server Error: " + err.message;
+        message = "Ошибка сервера: " + err.message;
       }
       break;
     case 11000: // request tried to dublicate a saved unique key
       repeatedField = Object.keys(err.keyValue)[0];
-      errorFields = [{field: repeatedField, kind: "dublicate", message: `this ${repeatedField} is already used before!`}]
+      errorFields = [{field: repeatedField, kind: "dublicate", message: `Данное значение уже использовано: ${repeatedField}`}]
       statusCode = 422;
-      message = `this ${repeatedField} is already used before!`;
+      message = `Данное значение уже использовано: ${repeatedField}`;
       break;
     case 401:
       statusCode = 401;

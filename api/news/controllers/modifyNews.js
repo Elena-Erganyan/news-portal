@@ -7,12 +7,12 @@ const modifyNews = async (req, res) => {
   const user = req.user;
 
   if (news === null) {
-    throw new DB404Error("News doesn't exist");
+    throw new DB404Error("Такой новости не существует");
   }
 
   const isUserNewsOwner = user._id.equals(news.owner);
   if (!isUserNewsOwner) {
-    throw new UnauthorizedError("Only the author can modify this news");
+    throw new UnauthorizedError("Только автор новости может её редактировать");
   } 
 
   // if no errors thrown from the above function then we do the modification
@@ -20,7 +20,7 @@ const modifyNews = async (req, res) => {
   const modifiedDoc = Object.assign(news, req.body);
   await modifiedDoc.save();
   
-  res.status(200).json(modifiedDoc);
+  res.status(200).json({modifiedDoc, message: "Новость успешно отредактирована"});
 };
 
 

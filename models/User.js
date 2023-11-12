@@ -5,18 +5,18 @@ const { isStrongPassword, isEmail } = validator;
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Can't be empty"],
-    maxLength: [20, "Maximum characters limit of 20 is exceeded"],
+    required: [true, "Не может быть пустым"],
+    maxLength: [20, "Превышен лимит в 20 символов"],
   },
   username: {
     type: String,
     unique: true,
-    required: [true, "Can't be empty"],
+    required: [true, "Не может быть пустым"],
     maxLength: 20,
     validate: {
       validator: (usernameStr) => {
         if (usernameStr.search(/\s/) !== -1){
-          throw new Error("Username can't include a space");
+          throw new Error("Юзернейм не должен содержать пробел");
         }
         return true;
       }
@@ -24,13 +24,13 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, "Can't be empty"],
+    required: [true, "Не может быть пустым"],
     unique: true,
     lowercase: true,
     validate: {
       validator: (emailStr) => {
         if (!isEmail(emailStr)){
-          throw new Error("Email is not valid");
+          throw new Error("Введённые данные не являются корректным адресом электронной почты");
         }
         return true;
       }
@@ -38,11 +38,11 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Can't be empty"],
+    required: [true, "Не может быть пустым"],
     validate: {
       validator: (passwordStr) => {
         if (!isStrongPassword(passwordStr)) {
-          throw new Error("Password is weak");
+          throw new Error("Ненадёжный пароль");
         }
         return true;
       }
