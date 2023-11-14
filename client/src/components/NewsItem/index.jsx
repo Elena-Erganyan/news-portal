@@ -68,7 +68,9 @@ const NewsItem = ({newsItem, isNewsPage = false}) => {
         <h2 className="newsItem__title">{title}</h2>
       </Link>
 
-      <p className="newsItem__description">{description}</p>
+      <p className="newsItem__description">
+        {!isNewsPage && description.length > 100 ? description.slice(0, 100) + "..." : description}
+      </p>
 
       {error && <p className="error">{getErrorMessage(error)}</p>}
       {data.message && <p className="success">{data.message}</p>}

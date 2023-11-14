@@ -50,7 +50,7 @@ const NewsEditor = () => {
       }
     } else if (hasAdded || hasModified) {
         setMessage(additionData.message || modificationData.message);
-        timeoutId = setTimeout(() => navigate(-1), 1500);
+        timeoutId = setTimeout(() => navigate("/dashboard"), 1500);
     }
 
     return () => clearTimeout(timeoutId);

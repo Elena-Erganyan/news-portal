@@ -5,6 +5,8 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
 
   &__container {
@@ -13,10 +15,6 @@
 
     @media only screen and (min-width: $md) {
       grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media only screen and (min-width: $lg) {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
 
