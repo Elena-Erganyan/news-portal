@@ -50,12 +50,13 @@ const ResendEmail = ({ email }) => {
 
       </div>
 
-      {isSuccess && timer > 0 ? data.message : <p>{getErrorMessage(error)}</p>}
+      {isSuccess && timer > 0
+        ? <p className="success">{data.message}</p>
+        : <p className="error">{getErrorMessage(error)}</p>
+      }
     
       {timer > 0 
-        && <p style={{marginTop: "2rem"}}>
-              Вы можете отправить письмо активации повторно через {timer} секунд
-            </p>}
+        && <p>Вы можете отправить письмо активации повторно через {timer} секунд</p>}
     </div>
   );
 };

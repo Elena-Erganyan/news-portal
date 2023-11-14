@@ -1,5 +1,6 @@
 const News = require("../../../models/News");
 const { DB404Error } = require("../../utils/catchErrors");
+const schedule = require("node-schedule");
 
 const modifyNews = async (req, res) => {
   const id = req.params.id;
@@ -14,6 +15,10 @@ const modifyNews = async (req, res) => {
   if (!isUserNewsOwner) {
     throw new UnauthorizedError("Только автор новости может её редактировать");
   } 
+
+  if (req.body.publishDate && news.publishDate.toISOString() !== req.body.publishDate) {
+    schedule.rescheduleJob(id, new Date(req.body.publishDate));
+  }
 
   // if no errors thrown from the above function then we do the modification
 

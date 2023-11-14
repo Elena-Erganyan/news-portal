@@ -32,7 +32,7 @@ const resendActivation = async (req, res) => {
 
   await sendActivationEmail({req, email}); // await here because this is the main functionality
 
-  res.status(200).json({ message: "Пожалуйста, проверьте свою электонную почту"});
+  res.status(200).json({ message: "Пожалуйста, проверьте свою электронную почту"});
 }
 
 module.exports = {activateUser, resendActivation};

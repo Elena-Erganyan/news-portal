@@ -12,25 +12,27 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState({identifier: "", password: ""});
-  const [showResendSection, setShowResendSection] = useState(true);
+  const [showResendSection, setShowResendSection] = useState(false);
 
   const [login, { isLoading, error }] = useLoginMutation();
-  console.log(error);
 
   useEffect(() => {
+    let timeoutId;
     if (error) {
       const errMessage = getErrorMessage(error);
       if (errMessage.indexOf("пароль") !== -1) {
         setErrors((prevErrors) => ({...prevErrors, password: errMessage}));
-      } else if (errMessage.indexOf("юзернейм") !== -1 || errMessage.indexOf("электроная почта") !== -1) {
+      } else if (errMessage.indexOf("юзернейм") !== -1 || errMessage.indexOf("электронная почта") !== -1) {
         setErrors((prevErrors) => ({...prevErrors, identifier: errMessage}));
       } else {
         setErrorMessage(errMessage);
-        if (errMessage === "Пожалуйста, активируйте свою учётную запись чтобы войти") {
-          setTimeout(() => setShowResendSection(true), 9000);
+        if (errMessage === "Пожалуйста, активируйте свою учётную запись, чтобы войти") {
+          setTimeout(() => setShowResendSection(true), 3000);
         }
       }
     }
+
+    return () => clearTimeout(timeoutId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
@@ -67,7 +69,6 @@ const Login = () => {
           id="password"
           name="password"
           onChange={(evt) => setPassword(evt.target.value)}
-          placeholder="Пароль"
           type="password"
           value={password}
         />
@@ -85,7 +86,7 @@ const Login = () => {
 
       {showResendSection && <ResendEmail email={identifier} />}
       {errorMessage && <p className="error">{errorMessage}</p>}
-      {message && <p className="success-msg">{message}</p>}
+      {message && <p className="success">{message}</p>}
     </form>
   );
 };

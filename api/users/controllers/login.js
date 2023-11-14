@@ -13,16 +13,16 @@ const login = async (req, res) => {
     throw new BadReqError("Не заполнено обязательное поле");
   }
 
-  const identifierUsed = isEmail(identifier) ?  "электронная почта" : "юзернейм";
+  const identifierUsed = isEmail(identifier) ?  "email" : "username";
   
-  if (identifierUsed === "электронная почта"){
+  if (identifierUsed === "email"){
     identifier = identifier.toLowerCase();
   }
   
   const user = await User.findOne({[identifierUsed]: identifier});
 
   if (user === null) {
-    throw new DB404Error(`Данный идентификатор: ${identifierUsed} не найден или некорректен`);
+    throw new DB404Error(`Данный ${identifierUsed} не найден или некорректен`);
   }
 
   const isMatching = await bcrypt.compare(password, user.password);
@@ -32,7 +32,7 @@ const login = async (req, res) => {
   }
 
   if (!user.activated) {
-    throw new UnauthorizedError("Пожалуйста, активируйте свою учётную запись чтобы войти") 
+    throw new UnauthorizedError("Пожалуйста, активируйте свою учётную запись, чтобы войти") 
   }
 
   setUserCookies(res, user);

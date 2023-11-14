@@ -1,0 +1,23 @@
+.newsItem {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #404040;
+
+  &__title {
+    color: #646cff;
+  }
+
+  &__note {
+    color: yellow;
+  }
+
+  &__buttons {
+    text-align: right;
+  }
+
+  &__edit,
+  &__delete {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,28 @@
+@import "../../variables";
+
+.newsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+
+  &__container {
+    display: grid;
+    gap: 10px;
+
+    @media only screen and (min-width: $md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media only screen and (min-width: $lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__user {
+    font-size: inherit;
+    font-weight: bold;
+    color: #43c7c7;
+  }
+}

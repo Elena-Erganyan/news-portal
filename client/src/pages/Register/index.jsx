@@ -118,7 +118,7 @@ const Register = () => {
         
       {showResendSection && <ResendEmail email={email} />}
       {errorMessage && <p className="error">{errorMessage}</p>}
-      {message && <p className="success-msg">{message}</p>}
+      {message && <p className="success">{message}</p>}
     </form>
   );
 };

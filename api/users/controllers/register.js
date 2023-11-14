@@ -13,7 +13,7 @@ const register = async (req, res)=> {
   //send email to confirm and activate user
   sendActivationEmail({req, email, user});
 
-  res.status(201).json({ message: "User was registered successfully! Please check your email"});
+  res.status(201).json({ message: "Пользователь успешно зарегистрирован! Пожалуйста, проверьте свою электронную почту"});
 };
 
 module.exports = register;

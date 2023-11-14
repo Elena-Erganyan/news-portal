@@ -50,7 +50,7 @@ const sendActivationEmail = async ({ req, email, user })=> {
   const emailToken = createToken({ _id:targetUser._id }, "1d");
 
   await sendEmail({email, configs: {
-    subject: "Activate your account on News Portal",
+    subject: "Активируйте свою учётную запись на News Portal",
     template: "activation",
     context: {
       name: targetUser.name,

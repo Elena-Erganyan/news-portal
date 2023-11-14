@@ -1,0 +1,21 @@
+.newsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.newsList__container {
+  display: grid;
+  gap: 10px;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media only screen and (min-width: 1440px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

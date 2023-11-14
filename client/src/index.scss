@@ -20,11 +20,24 @@
   font-weight: 400;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+
 .error {
   color: crimson;
 }
 
-.success-msg {
+.success {
   color: #43c7c7;
 }
 
@@ -43,7 +56,6 @@ body {
   justify-content: center;
   align-items: center;
   min-width: 320px;
-  min-height: 100vh;
 }
 
 button {
@@ -72,6 +84,8 @@ form {
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
   padding: 25px;
   border-radius: 10px;
   background-color: #404040;
@@ -85,6 +99,7 @@ h1 {
 h2 {
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 label {
@@ -95,17 +110,20 @@ label {
   width: 100%;
 }
 
-input {
+input, textarea {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid white;
   width: 100%;
 }
 
+textarea {
+  resize: none;
+}
+
 .note {
   font-size: 12px;
   text-align: left;
-  max-width: 400px;
 }
 
 .form__footer {
@@ -114,4 +132,9 @@ input {
   align-items: center;
   gap: 20px;
   width: 100%;
+}
+
+summary {
+  margin-bottom: 10px;
+  cursor: pointer;
 }

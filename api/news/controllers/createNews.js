@@ -13,7 +13,7 @@ const createNews = async (req, res) => {
   if (req.body.publishDate) {
     const datetime = new Date(req.body.publishDate);
 
-    schedule.scheduleJob(datetime, async function(){
+    schedule.scheduleJob(news.id, datetime, async function(){
       news.published = true;
       await news.save();
     });

@@ -1,5 +1,6 @@
 const News = require("../../../models/News");
 const { DB404Error, UnauthorizedError } = require("../../utils/catchErrors");
+const schedule = require("node-schedule");
 
 const deleteNews = async (req, res) => {
   const id = req.params.id;
@@ -16,6 +17,7 @@ const deleteNews = async (req, res) => {
   user.newsHistory = user.newsHistory.filter(newsId => !newsId.equals(id));
   await user.save();
   
+  schedule.cancelJob(news.id);
   await news.deleteOne();
 
   res.status(200).json({ message: "Новость успешно удалена" });
