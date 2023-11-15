@@ -1,11 +1,12 @@
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../redux/userSlice";
 import { useDeleteNewsItemMutation } from "../../redux/api/newsApi";
-import { Link, useNavigate } from "react-router-dom";
+import { getErrorMessage } from "../../utils/getErrorMessage";
+import MarkdownPreview from "@uiw/react-markdown-preview";
 import { PencilLine, Trash } from "@phosphor-icons/react";
 import "./styles.scss";
-import { getErrorMessage } from "../../utils/getErrorMessage";
-import { useEffect } from "react";
 
 
 const NewsItem = ({newsItem, isNewsPage = false}) => {
@@ -68,9 +69,14 @@ const NewsItem = ({newsItem, isNewsPage = false}) => {
         <h2 className="newsItem__title">{title}</h2>
       </Link>
 
-      <p className="newsItem__description">
-        {!isNewsPage && description.length > 100 ? description.slice(0, 100) + "..." : description}
-      </p>
+      <div className="newsItem__description">
+        <MarkdownPreview
+          source={!isNewsPage && description.length > 100
+                    ? description.slice(0, 100) + "..."
+                    : description}
+          style={{backgroundColor: "transparent"}}
+        />
+      </div>
 
       {error && <p className="error">{getErrorMessage(error)}</p>}
       {data.message && <p className="success">{data.message}</p>}

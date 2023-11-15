@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Elena-Erganyan/news-portal#readme",
   "dependencies": {
+    "@uiw/react-md-editor": "^3.25.6",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

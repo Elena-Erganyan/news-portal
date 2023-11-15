@@ -10,6 +10,8 @@ const newsSchema = new mongoose.Schema({
     type: String,
     required: [true, "Не может быть пустым"],
   },
+  image: String,
+  // files: [String],
   owner: {
     type: mongoose.Types.ObjectId,
     ref: "User",
