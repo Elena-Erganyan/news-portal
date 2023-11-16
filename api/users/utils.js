@@ -25,12 +25,6 @@ const setUserCookies = (res, user, maxDaysAge = "1d") => {
   res.cookie("loggedIn", true, {
     maxAge: parseFloat(maxDaysAge) * oneDayMiliseconds
   });
-
-  res.cookie("cookiesAge", maxDaysAge, {
-    httpOnly: true,
-    secure: true,
-    maxAge: parseFloat(maxDaysAge) * oneDayMiliseconds
-  });
   
   return token;
 }

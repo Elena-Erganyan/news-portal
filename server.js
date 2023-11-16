@@ -1,9 +1,7 @@
 require("dotenv").config(0);
 
 const express = require("express");
-const os = require("os");
 const mongoose = require("mongoose");
-const formData = require("express-form-data");
 const cors = require("cors");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -15,9 +13,6 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, "./client/dist")));
 app.use(cors());
-
-// parse data with connect-multiparty.
-app.use(formData.parse({uploadDir: os.tmpdir(), autoClean: true}));
 
 //routes
 app.use("/api/users", require("./api/users/routes"));
