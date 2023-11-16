@@ -16,7 +16,7 @@ export default defineConfig({
       // overwrite default .html entry
       input: "./src/main.jsx",
       output: {
-        entryFileNames: "assets/[name]_v1.js"
+        entryFileNames: "assets/[name]_v2.js"
       },
     },
   },

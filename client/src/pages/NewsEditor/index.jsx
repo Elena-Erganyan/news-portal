@@ -7,6 +7,7 @@ import { getErrorMessage } from "../../utils/getErrorMessage";
 import { useCachedNewsItem } from "../../utils/useCachedNewsItem";
 import MDEditor, { commands } from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
+import { formatDate } from "./utils";
 import { insertImage } from "./mdEditorComponents/inserImage";
 import { attachDocument } from "./mdEditorComponents/attachDocument";
 import "./styles.scss";
@@ -25,13 +26,6 @@ const NewsEditor = () => {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState({title: "", description: ""});
-
-  let publishDateFormatted = "";
-  if (publishDate) {
-    // const timezoneOffset = new Date(publishDate).getTimezoneOffset() * 60 * 1000; // in milliseconds
-    // const localPublishDate = new Date(new Date(publishDate).getTime() - timezoneOffset);
-    publishDateFormatted = new Date(publishDate).toISOString().slice(0, 16);
-  }
 
   const [addNewsItem, {
     isLoading: isAdding, error: additionError, isSuccess: hasAdded, data: additionData = {}
@@ -125,8 +119,8 @@ const NewsEditor = () => {
                   id="publishDate"
                   name="publishDate"
                   type="datetime-local"
-                  min={new Date().toISOString().slice(0, 16)}
-                  value={publishDateFormatted}
+                  min={formatDate(new Date())}
+                  value={publishDate ? formatDate(new Date(publishDate)) : undefined}
                   onChange={(evt) => setPublishDate(evt.target.value)}
                 />
               </details>
