@@ -6,10 +6,9 @@ import { useAddNewsItemMutation, useModifyNewsItemMutation } from "../../redux/a
 import { getErrorMessage } from "../../utils/getErrorMessage";
 import { useCachedNewsItem } from "../../utils/useCachedNewsItem";
 import MDEditor, { commands } from "@uiw/react-md-editor";
-import { storage } from "../../firebase";
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import { v4 } from "uuid";
 import rehypeSanitize from "rehype-sanitize";
+import { insertImage } from "./mdEditorComponents/inserImage";
+import { attachDocument } from "./mdEditorComponents/attachDocument";
 import "./styles.scss";
 
 
@@ -26,8 +25,6 @@ const NewsEditor = () => {
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState({title: "", description: ""});
-
-  const inputRef = useRef(null);
 
   let publishDateFormatted = "";
   if (publishDate) {
@@ -83,63 +80,6 @@ const NewsEditor = () => {
     }   
   };
 
-  const addImage = {
-    ...commands.image,
-    render: (command, disabled, executeCommand) => {
-
-      const onChange = async (evt) => {
-        if (evt.target.files.length && !evt.target.files[0]?.type.match("image.*")) {
-          alert("Допускаются только изображения");
-          return;
-        }
-
-        command.file = evt.target.files[0];
-        executeCommand(command, command.groupName);
-      };
-      
-      return (
-        <>
-          <input
-            ref={inputRef}
-            style={{display: "none"}}
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={onChange}
-          />
-          <button
-            type="button"
-            aria-label="Insert image"
-            disabled={disabled}
-            onClick={() => inputRef.current?.click()}
-          >
-            {commands.image.icon}
-          </button>
-        </>
-      )
-    },
-    execute: async (state, api) => {
-      if (!state.command.file) return;
-
-      const storageRef = ref(storage, `images/${state.command.file.name + v4()}`); // for files to have different names even if users choose the same ones
-      const uploadTask = uploadBytesResumable(storageRef, state.command.file);
-
-      uploadTask.on("state_changed",
-        (snapshot) => {
-          const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          console.log(progress);
-        },
-        (err) => {
-          console.log(err);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref)
-            .then(url => api.replaceSelection(`![](${url})\n`));
-        }
-      );
-    },
-  };
-
   return (
     <main className="news-editor">
       <h2 className="news-editor__title">{newsItemId ? "Oтредактировать" : "Создать новую"} статью</h2>
@@ -148,6 +88,7 @@ const NewsEditor = () => {
           Заголовок
           <input
             id="title"
+            maxLength={90}
             name="title"
             type="text"
             value={title}
@@ -156,15 +97,14 @@ const NewsEditor = () => {
           {errors.title && <p className="error">{errors.title}</p>}
         </label>
 
-        {/* <label>
-          Прикрепить файл
-          <input type="file" id="document" accept=".docx, .doc, .pdf, .txt" onChange={(evt) => setDocumentUpload(evt.target.files[0])}/>
-        </label> */}
-
         <label>
           Текст
           <MDEditor
-            commands={[...commands.getCommands(), addImage]}
+            commands={[
+              ...commands.getCommands().filter((command) => command.name !== "image"),
+              insertImage,
+              attachDocument,
+            ]}
             value={description}
             onChange={setDescription}
             style={{width: "100%"}}

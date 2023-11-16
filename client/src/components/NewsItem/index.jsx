@@ -69,14 +69,14 @@ const NewsItem = ({newsItem, isNewsPage = false}) => {
         <h2 className="newsItem__title">{title}</h2>
       </Link>
 
-      <div className="newsItem__description">
-        <MarkdownPreview
-          source={!isNewsPage && description.length > 100
-                    ? description.slice(0, 100) + "..."
-                    : description}
-          style={{backgroundColor: "transparent"}}
-        />
-      </div>
+      {isNewsPage &&
+        <div className="newsItem__description">
+          <MarkdownPreview
+            source={description}
+            style={{backgroundColor: "transparent"}}
+          />
+        </div>
+      }
 
       {error && <p className="error">{getErrorMessage(error)}</p>}
       {data.message && <p className="success">{data.message}</p>}
