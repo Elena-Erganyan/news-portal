@@ -21,16 +21,16 @@ const NewsEditor = () => {
 
   const [title, setTitle] = useState(newsItemData?.title || "");
   const [description, setDescription] = useState(newsItemData?.description || "");
-  const [publishDate, setPublishDate] = useState(newsItemData?.publishDate || "");
+  const [publishDate, setPublishDate] = useState(newsItemData?.publishDate || undefined);
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState({title: "", description: ""});
 
   let publishDateFormatted = "";
   if (publishDate) {
-    const timezoneOffset = new Date(publishDate).getTimezoneOffset() * 60 * 1000; // in milliseconds
-    const localPublishDate = new Date(new Date(publishDate).getTime() - timezoneOffset);
-    publishDateFormatted = localPublishDate.toISOString().slice(0, 16);
+    // const timezoneOffset = new Date(publishDate).getTimezoneOffset() * 60 * 1000; // in milliseconds
+    // const localPublishDate = new Date(new Date(publishDate).getTime() - timezoneOffset);
+    publishDateFormatted = new Date(publishDate).toISOString().slice(0, 16);
   }
 
   const [addNewsItem, {
@@ -97,8 +97,8 @@ const NewsEditor = () => {
           {errors.title && <p className="error">{errors.title}</p>}
         </label>
 
-        <label>
-          Текст
+        <div className="label">
+          <label>Текст</label>
           <MDEditor
             commands={[
               ...commands.getCommands().filter((command) => command.name !== "image"),
@@ -115,7 +115,7 @@ const NewsEditor = () => {
             }}
           />
           {errors.description && <p className="error">{errors.description}</p>}
-        </label>
+        </div>
         
         <div className="news-editor__publish">
           {!newsItemId || new Date(newsItemData?.publishDate) > new Date()
