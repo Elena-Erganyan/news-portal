@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon server",
     "client": "npm run dev --prefix client",
-    "build": "npm run build --prefix client && rm -rf client/node_modules"
+    "build": "npm install && npm run build --prefix client && rm -rf client/node_modules"
   },
   "repository": {
     "type": "git",
