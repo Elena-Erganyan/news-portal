@@ -52,10 +52,6 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  newsHistory: {
-    type: [mongoose.Types.ObjectId],
-    ref: "News",
-  },
 }, {timestamps: true});
 
 

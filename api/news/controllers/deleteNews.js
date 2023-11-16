@@ -13,9 +13,6 @@ const deleteNews = async (req, res) => {
   if (!user._id.equals(news.owner)){
     throw new UnauthorizedError("Только автор новости может её удалить");
   }
-
-  user.newsHistory = user.newsHistory.filter(newsId => !newsId.equals(id));
-  await user.save();
   
   schedule.cancelJob(news.id);
   await news.deleteOne();

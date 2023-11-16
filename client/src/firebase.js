@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCl6SspBeMhgG0pvmKca5m2Le240n4mw9A",
-  authDomain: "news-portal-b77a0.firebaseapp.com",
-  projectId: "news-portal-b77a0",
-  storageBucket: "news-portal-b77a0.appspot.com",
-  messagingSenderId: "680968802432",
-  appId: "1:680968802432:web:9e0a26ab8dea15b90c5665"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 // Initialize Firebase

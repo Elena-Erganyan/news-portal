@@ -7,9 +7,6 @@ const createNews = async (req, res) => {
 
   const news = await News.create(req.body);
 
-  user.newsHistory = [...user.newsHistory, news._id];
-  await user.save();
-
   if (req.body.publishDate) {
     const datetime = new Date(req.body.publishDate);
 

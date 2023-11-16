@@ -7,11 +7,13 @@ import paperclip from "../../../assets/paperclip-bold.svg";
 export const attachDocument = {
   ...commands.image,
   render: (command, disabled, executeCommand) => {
-    const allowedFormats = [".docx", ".doc", ".pdf", ".rtf", ".txt", ".odt", ".xlsx", ".xls", ".ppt", ".pptx"];
-
+    const allowedFormats = [".docx", ".doc", ".pdf", ".rtf", ".txt", ".xlsx", ".xls", ".ppt", ".pptx"];
+        
     const handleChange = (evt) => {
-      if (evt.target.files.length && !evt.target.files[0]?.type in allowedFormats) {
-        alert(`Допускаются только следующие форматы: ${allowedFormats}`);
+      const filePath = evt.target.value;
+
+      if (evt.target.files.length && !(allowedFormats.includes(filePath.slice(filePath.lastIndexOf("."))))) {
+        alert(`Допускаются только следующие форматы: ${allowedFormats.join(" ")}`);
         return;
       }
 
