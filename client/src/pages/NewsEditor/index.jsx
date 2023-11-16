@@ -7,7 +7,7 @@ import { getErrorMessage } from "../../utils/getErrorMessage";
 import { useCachedNewsItem } from "../../utils/useCachedNewsItem";
 import MDEditor, { commands } from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
-import { formatDate } from "./utils";
+import { formatDate, toHoursAndMinutes } from "./utils";
 import { insertImage } from "./mdEditorComponents/inserImage";
 import { attachDocument } from "./mdEditorComponents/attachDocument";
 import "./styles.scss";
@@ -67,10 +67,14 @@ const NewsEditor = () => {
     setMessage("");
     setErrorMessage("");
 
+    const diff = new Date(publishDate).getTimezoneOffset();
+    const sign = Math.sign(diff) < 0 ? "+" : "-";
+    const UTCPublishDate = publishDate + sign + toHoursAndMinutes(Math.abs(diff));
+
     if (newsItemId && newsItemData) {
-      modifyNewsItem({id: newsItemId, data: {title, description, publishDate}})
+      modifyNewsItem({id: newsItemId, data: {title, description, publishDate: UTCPublishDate}})
     } else {
-      addNewsItem({title, description, publishDate});
+      addNewsItem({title, description, publishDate: UTCPublishDate});
     }   
   };
 
