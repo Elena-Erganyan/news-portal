@@ -4,13 +4,13 @@
   gap: 10px;
   width: 100%;
   padding: 20px;
-}
 
-.newsList__container {
-  display: grid;
-  gap: 10px;
+  &__container {
+    display: grid;
+    gap: 10px;
 
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 50%);
+    @media only screen and (min-width: 768px) {
+      grid-template-columns: repeat(2, 50%);
+    }
   }
 }
