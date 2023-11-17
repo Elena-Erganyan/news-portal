@@ -51,7 +51,7 @@ const Login = () => {
       <h2>Войти</h2>
 
       <label>
-        Идентификатор (юзернейм или email)
+        Идентификатор
         <input
           id="identifier"
           name="identifier"
