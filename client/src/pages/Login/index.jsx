@@ -51,12 +51,12 @@ const Login = () => {
       <h2>Войти</h2>
 
       <label>
-        Идентификатор (имя или email)
+        Идентификатор (юзернейм или email)
         <input
           id="identifier"
           name="identifier"
           onChange={(evt) => setIdentifier(evt.target.value)}
-          placeholder="Имя или email"
+          placeholder="Юзернейм или email"
           type="text"
           value={identifier}
         />
